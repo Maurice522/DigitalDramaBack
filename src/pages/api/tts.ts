@@ -143,6 +143,7 @@ async function handlePost({ request }: Parameters<APIRoute>[0]): ReturnType<APIR
     import.meta.env.CARTESIA_API_KEY_4 ?? process.env.CARTESIA_API_KEY_4,
     import.meta.env.CARTESIA_BACKUP_API_KEY ?? process.env.CARTESIA_BACKUP_API_KEY,
     import.meta.env.CARTESIA_BACKUP_API_KEY_2 ?? process.env.CARTESIA_BACKUP_API_KEY_2,
+    import.meta.env.CARTESIA_BACKUP_API_KEY_3 ?? process.env.CARTESIA_BACKUP_API_KEY_3,
   ].filter((key): key is string => Boolean(key));
   if (apiKeys.length === 0) return jsonError("CARTESIA_LIVE_API_KEY is not set", 500, request);
 
