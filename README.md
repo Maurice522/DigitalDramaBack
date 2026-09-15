@@ -16,7 +16,7 @@ The main site (`digital-drama-blog/site`) is deployed as a fully static build on
 See `.env.example`. Required:
 
 - `MONGODB_URI` — same database as the main site (`digitalDrama`), used to read article text and cache generated audio.
-- `CARTESIA_LIVE_API_KEY`, `CARTESIA_API_KEY`, `CARTESIA_API_KEY_2`, `CARTESIA_API_KEY_3`, `CARTESIA_BACKUP_API_KEY` — tried in that order; only a quota error falls through to the next key.
+- `CARTESIA_LIVE_API_KEY`, `CARTESIA_API_KEY`, `CARTESIA_API_KEY_2`, `CARTESIA_API_KEY_3`, `CARTESIA_API_KEY_4`, `CARTESIA_BACKUP_API_KEY`, `CARTESIA_BACKUP_API_KEY_2` — tried in that order; only a quota error falls through to the next key.
 - `ALLOWED_ORIGIN` — comma-separated list of origins allowed to call this API in the browser (CORS). Defaults to `*`; tighten this to the real Cloudflare Pages / production domain once it's known.
 
 ## Local development
