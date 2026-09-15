@@ -3,9 +3,15 @@ import { MongoClient, type Db } from "mongodb";
 
 // Some networks (notably Windows behind certain routers/VPNs) refuse SRV
 // record lookups, which mongodb+srv:// requires. Prefer public resolvers
-// that support them, falling back to whatever was already configured. Not
-// needed on Netlify's own runtime, but keeps local dev working everywhere.
-dns.setServers(["1.1.1.1", "8.8.8.8", ...dns.getServers()]);
+// that support them, falling back to whatever was already configured. Purely
+// a local-dev convenience — wrapped in try/catch since serverless runtimes
+// (e.g. Netlify Functions) can disallow changing DNS servers outright, which
+// would otherwise crash the function before it ever handles a request.
+try {
+  dns.setServers(["1.1.1.1", "8.8.8.8", ...dns.getServers()]);
+} catch (err) {
+  console.warn(`[mongodb] Could not override DNS servers, continuing with defaults: ${(err as Error).message}`);
+}
 
 export interface Article {
   _id?: string;

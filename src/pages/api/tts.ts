@@ -92,7 +92,16 @@ export const OPTIONS: APIRoute = async ({ request }) => {
   return new Response(null, { status: 204, headers: corsHeaders(request) });
 };
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async (context) => {
+  try {
+    return await handlePost(context);
+  } catch (err) {
+    console.error(`[tts] Unhandled error: ${(err as Error).stack ?? (err as Error).message}`);
+    return jsonError("Internal server error", 500, context.request);
+  }
+};
+
+async function handlePost({ request }: Parameters<APIRoute>[0]): ReturnType<APIRoute> {
   let body: { slug?: string; section?: string };
   try {
     body = await request.json();
